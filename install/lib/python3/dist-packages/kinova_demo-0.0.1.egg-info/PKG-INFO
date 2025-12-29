@@ -1,0 +1,17 @@
+Metadata-Version: 1.2
+Name: kinova-demo
+Version: 0.0.1
+Summary: The kinova_demo package
+Home-page: UNKNOWN
+Author: Braden Stenning
+Author-email: braden@stenning.com
+Maintainer: Kinova Support
+Maintainer-email: support@kinova.ca
+License: BSD
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires: std_msgs
+Requires: rospy
+Requires: kinova_msgs
+Requires: kinova_driver
+Requires: geometry_msgs

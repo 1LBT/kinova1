@@ -1,0 +1,51 @@
+<launch>
+
+  <arg name="camera"          default="camera" />
+  <arg name="use_wrist_static_tf" default="false" />
+
+  <!-- Type of RealSense camera -->
+  <arg name="camera_type"     default="D405" />
+
+  <!-- "serial_no" or "usb_port_id" should be a unique identifier to connect to a device -->
+  <arg name="serial_no"     default="" />
+  <arg name="usb_port_id"   default="" /> <!-- USB "Bus#-Port#" -->
+
+  <!-- Best know configuration for generating depth registered point cloud. -->
+  <arg name="mode"            default="manual" />
+  <arg name="color_width"     default="640" />
+  <arg name="color_height"    default="480" />
+  <arg name="depth_width"     default="640" />
+  <arg name="depth_height"    default="480" />
+  <arg name="depth_fps"       default="30" />
+  <arg name="color_fps"       default="30" />
+
+  <!-- Simple RealSense driver launch -->
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+    <arg name="camera" value="$(arg camera)"/>
+    <arg name="serial_no" value="$(arg serial_no)"/>
+    <arg name="usb_port_id" value="$(arg usb_port_id)"/>
+    <arg name="color_width" value="$(arg color_width)"/>
+    <arg name="color_height" value="$(arg color_height)"/>
+    <arg name="depth_width" value="$(arg depth_width)"/>
+    <arg name="depth_height" value="$(arg depth_height)"/>
+    <arg name="color_fps" value="$(arg color_fps)"/>
+    <arg name="depth_fps" value="$(arg depth_fps)"/>
+    <arg name="enable_color" value="true"/>
+    <arg name="enable_depth" value="true"/>
+    <arg name="enable_pointcloud" value="true"/>
+    <arg name="publish_tf" value="true"/>
+  </include>
+
+  <!-- Optional legacy wrist static TF (disabled by default to avoid conflict with hand-eye calibration TF) -->
+  <node if="$(arg use_wrist_static_tf)" pkg="tf" type="static_transform_publisher" name="realsense_link_broadcaster"
+        args="0.05425 -0.024 -0.1258 3.14 1.32 0 /m1n6s200_link_6 /camera_link 10" />
+
+<!--  <node name="image_view_rgb" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/camera/rgb/image_color" />
+  </node>
+
+  <node name="image_view_depth" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/camera/depth/image_meters" />
+  </node> -->
+
+</launch>
