@@ -1,0 +1,5 @@
+# generated from catkin/cmake/template/order_packages.context.py.in
+source_root_dir = '/home/liu/kinova_ws/src'
+whitelisted_packages = ''.split(';') if '' != '' else []
+blacklisted_packages = 'find_object_2d'.split(';') if 'find_object_2d' != '' else []
+underlay_workspaces = '/opt/ros/noetic'.split(';') if '/opt/ros/noetic' != '' else []
